@@ -24,7 +24,7 @@ set expandtab        " Always expand tabs to spaces
 set softtabstop=3    " Use 3 spaces when pressing tab in insert mode
 set shiftwidth=3     " Shifting/indenting text inserts 3 spaces
 
-set listchars=tab:▸-,trail:.,eol:¬
+set listchars=tab:>-,eol:¬
 
 filetype indent on   " Use filetype specific indentation
 set autoindent       " Copy indent from current line when creating new line
@@ -41,6 +41,8 @@ set hidden           " No error/warnings when navigating away from edited file
 set splitbelow       " Split below by default
 set autowrite        " Save all buffers when commands like 'make' called
 
+set statusline="%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P"
+
 set noswapfile       " No swap files, we have version control for pete's sake
 
 " For GVim
@@ -50,6 +52,13 @@ set guioptions-=r    " No scrollbar
 " When opening vimdiff always split vertical and show filler lines
 " for missing text
 set diffopt=vertical,filler
+
+" }}}
+" Editing {{{
+
+set backspace=indent,eol,start
+set fileformat=unix
+set fileformats=unix,dos
 
 " }}}
 " Searching, Wildmode {{{
@@ -125,17 +134,18 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+if has('win32')
+   set rtp+=$VIM/vimfiles/bundle/Vundle.vim
+   call vundle#begin('$VIM/vimfiles/bundle/')
+else
+   set rtp+=~/.vim/bundle/Vundle.vim
+   call vundle#begin()
+endif
 
 " Let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins
-Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-visual-star-search'
@@ -149,6 +159,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'SirVer/ultisnips'
 Plugin 'sjl/gundo.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-abolish'
@@ -157,32 +168,48 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-set rtp+=~/.vim/bundle/potion
-
+"-------------------------------------------------------------------------------
 " Airline
 " Always show status line otherwise won't show up until split
+"-------------------------------------------------------------------------------
+
 set laststatus=2
 
+"-------------------------------------------------------------------------------
 " YouCompleteMe
 " Set default config AND don't require prompt for configuration
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+"-------------------------------------------------------------------------------
+
+if has('win32')
+   let g:ycm_global_ycm_extra_conf = '$VIM/vimfiles/bundle/YouCompleteMe/.ycm_extra_conf.py'
+else
+   let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+endif
 let g:ycm_confirm_extra_conf = 0
 
+"-------------------------------------------------------------------------------
 " Use Ag for search and CtrlP
+"-------------------------------------------------------------------------------
+
 if executable('ag')
-   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+   let g:ctrlp_user_command = 'ag -i --nocolor --nogroup --hidden -g "" %s'
+   let g:ctrlp_working_path_mode = 0
 endif
 
+"-------------------------------------------------------------------------------
 " This is best way to prevent ultisnips from interfering with ycm
+"-------------------------------------------------------------------------------
+
 let g:UltiSnipsExpandTrigger = '<C-j>'
 
 "-------------------------------------------------------------------------------
-"                       Define functions for header include guards
+" Define functions for header include guards
 "-------------------------------------------------------------------------------
 
 " Use python for random number generation
@@ -229,10 +256,10 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 
 " Resize windows
-nnoremap <leader>wi <C-w>10>
-nnoremap <leader>wd <C-w>10<
-nnoremap <leader>hi <C-w>10+
-nnoremap <leader>hd <C-w>10-
+nnoremap <leader>wi :vertical resize +20<CR>
+nnoremap <leader>wd :vertical resize -20<CR>
+nnoremap <leader>hi :resize +20<CR>
+nnoremap <leader>hd :resize -20<CR>
 
 " Sort
 vnoremap <leader>s :sort<CR>
@@ -240,6 +267,9 @@ vnoremap <leader>s :sort<CR>
 " Remap space to fold/unfold section
 nnoremap <space> za
 
+" History sensitive buffer jumping
+nnoremap <leader><C-o>  :BufSurfBack<CR>
+nnoremap <leader><C-i>  :BufSurfForward<CR>
 " Mappings for vim-fugitive
 nnoremap <leader>gs :Gstatus<CR><C-w>K<CR>
 nnoremap <leader>gl :Git! loggraph<CR>
@@ -262,8 +292,6 @@ nnoremap <leader>fs :FSHere<CR>
 " Open ctrlp
 let g:ctrlp_map = '<leader>fo'
 
-" Execute shell
-nnoremap <leader>sh :!gnome-terminal<CR>
 
 " Tagbar toggle for viewing organized tag list of current buffer
 nnoremap <leader>tb :TagbarToggle<CR>
@@ -280,7 +308,6 @@ vnoremap <leader>a* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('g
 " Allow loading 'project' specific settings from working directory config
 " files
 set exrc
-set secure
 
 " vim: tabstop=3 softtabstop=3 shiftwidth=3 expandtab :
 " vim: foldmethod=marker foldmarker={{{,}}} foldmethod=marker foldlevel=0 :
