@@ -292,9 +292,10 @@ nnoremap <leader>fs :FSHere<CR>
 " Open ctrlp
 let g:ctrlp_map = '<leader>fo'
 
-
 " Tagbar toggle for viewing organized tag list of current buffer
+nnoremap <leader>tj :TagbarOpen fj<CR>
 nnoremap <leader>tb :TagbarToggle<CR>
+nnoremap <leader>tp :TagbarTogglePause<CR>
 
 " Gundo toggle
 nnoremap <leader>gt :GundoToggle<CR>
