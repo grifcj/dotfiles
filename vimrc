@@ -24,7 +24,7 @@ set expandtab        " Always expand tabs to spaces
 set softtabstop=3    " Use 3 spaces when pressing tab in insert mode
 set shiftwidth=3     " Shifting/indenting text inserts 3 spaces
 
-set listchars=tab:>-,eol:¬
+set listchars=tab:>-,eol:<
 
 filetype indent on   " Use filetype specific indentation
 set autoindent       " Copy indent from current line when creating new line
