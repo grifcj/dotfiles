@@ -146,8 +146,6 @@ endif
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins
-Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-visual-star-search'
@@ -161,6 +159,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'SirVer/ultisnips'
 Plugin 'sjl/gundo.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'ton/vim-bufsurf'
@@ -170,6 +169,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -263,7 +263,7 @@ nnoremap <leader>hi :resize +20<CR>
 nnoremap <leader>hd :resize -20<CR>
 
 " Sort
-vnoremap <leader>s :sort<CR>
+vnoremap <leader>s :sort i<CR>
 
 " Remap space to fold/unfold section
 nnoremap <space> za
