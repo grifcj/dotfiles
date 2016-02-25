@@ -257,6 +257,12 @@ nnoremap <C-k> <C-w><C-k>
 nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 
+" Treat wrapped lines the same as regular lines for various movements
+noremap j gj
+noremap k gk
+noremap $ g$
+noremap ^ g^
+
 " Resize windows
 nnoremap <leader>wi :vertical resize +20<CR>
 nnoremap <leader>wd :vertical resize -20<CR>
@@ -272,6 +278,7 @@ nnoremap <space> za
 " History sensitive buffer jumping
 nnoremap <leader><C-o>  :BufSurfBack<CR>
 nnoremap <leader><C-i>  :BufSurfForward<CR>
+
 " Mappings for vim-fugitive
 nnoremap <leader>gs :Gstatus<CR><C-w>K<CR>
 nnoremap <leader>gl :Git! loggraph<CR>
