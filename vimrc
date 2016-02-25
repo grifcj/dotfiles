@@ -208,7 +208,7 @@ endif
 " This is best way to prevent ultisnips from interfering with ycm
 "-------------------------------------------------------------------------------
 
-let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsExpandTrigger = '<C-l>'
 
 "-------------------------------------------------------------------------------
 " Define functions for header include guards
