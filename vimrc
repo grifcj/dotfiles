@@ -100,7 +100,7 @@ set foldnestmax=10         " Don't fold anything when opening file
   autocmd!
 
      " Always strip trailing whitespace when editing a file
-     autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+     autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
 
      " When editing a file, always jump to the last known cursor position.
      " Don't do it when the position is invalid or when inside an event handler
@@ -112,7 +112,7 @@ set foldnestmax=10         " Don't fold anything when opening file
        \   exe "normal! g`\"" |
        \ endif
 
-     " " Can't say I edit a lot of modula2. Force markdown for *.md files
+     " Can't say I edit a lot of modula2. Force markdown for *.md files
      autocmd BufNewFile,BufReadPost *.md set filetype=markdown
      autocmd FileType markdown setlocal sw=4 ts=4 sts=4
 
