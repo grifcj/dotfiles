@@ -230,8 +230,6 @@ nnoremap <leader>fs :FSHere<CR>
 " Mappings for vim-fugitive
 nnoremap <leader>gs   :Gstatus<CR><C-w>K<CR>
 nnoremap <leader>gl   :Git! loggraph<CR>
-nnoremap <leader>gdi  :Gdiff<CR>
-nnoremap <leader>gdh  :Gdiff HEAD<CR>
 
 " }}}
 " Gundo toggle {{{
@@ -303,6 +301,8 @@ else
 endif
 let g:ycm_confirm_extra_conf = 0
 
+let g:ycm_autoclose_preview_window_after_completion=1
+noremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " }}}
 
