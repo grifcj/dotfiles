@@ -182,43 +182,58 @@ Plugin 'Valloric/YouCompleteMe'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-"-------------------------------------------------------------------------------
-" Airline
-" Always show status line otherwise won't show up until split
-"-------------------------------------------------------------------------------
+" Ag / Visual Star Search {{{
 
+nnoremap <leader>a* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
+vnoremap <leader>a* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>
+         \ :call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>
+
+" }}}
+" Airline {{{
+
+" Always show status line otherwise won't show up until split
 set laststatus=2
 
-"-------------------------------------------------------------------------------
-" YouCompleteMe
-" Set default config AND don't require prompt for configuration
-"-------------------------------------------------------------------------------
+" }}}
+" Buffer surfer {{{
 
-if has('win32')
-   let g:ycm_global_ycm_extra_conf = '$VIM/vimfiles/bundle/YouCompleteMe/.ycm_extra_conf.py'
-else
-   let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
-endif
-let g:ycm_confirm_extra_conf = 0
+" History sensitive buffer jumping
+nnoremap <leader><C-o>  :BufSurfBack<CR>
+nnoremap <leader><C-i>  :BufSurfForward<CR>
 
-"-------------------------------------------------------------------------------
-" Use Ag for search and CtrlP
-"-------------------------------------------------------------------------------
+" }}}
+" CtrlP {{{
 
+" Use Ag for search
 if executable('ag')
    let g:ctrlp_user_command = 'ag -i --nocolor --nogroup --hidden -g "" %s'
    let g:ctrlp_working_path_mode = 0
 endif
 
-"-------------------------------------------------------------------------------
-" This is best way to prevent ultisnips from interfering with ycm
-"-------------------------------------------------------------------------------
+" Map to open ctrlp
+let g:ctrlp_map = '<leader>fo'
 
-let g:UltiSnipsExpandTrigger = '<C-l>'
+" }}}
+" File switch {{{
 
-"-------------------------------------------------------------------------------
-" Define functions for header include guards
-"-------------------------------------------------------------------------------
+nnoremap <leader>fs :FSHere<CR>
+
+" }}}
+" Fugitive {{{
+
+" Mappings for vim-fugitive
+nnoremap <leader>gs   :Gstatus<CR><C-w>K<CR>
+nnoremap <leader>gl   :Git! loggraph<CR>
+nnoremap <leader>gdi  :Gdiff<CR>
+nnoremap <leader>gdh  :Gdiff HEAD<CR>
+
+" }}}
+" Gundo toggle {{{
+
+nnoremap <leader>gt :GundoToggle<CR>
+
+" }}}
+" Headerguard {{{
 
 " Use python for random number generation
 function! <SID>RandomNumber(digits)
@@ -254,10 +269,36 @@ function! g:HeaderguardLine3()
    return "#endif"
 endfunction
 
-"-------------------------------------------------------------------------------
-" Livedown preview
-"-------------------------------------------------------------------------------
+" }}}
+" Livedown {{{
+
 nnoremap <leader>lp :LivedownPreview<CR>
+
+" }}}
+" Tagbar {{{
+
+nnoremap <leader>tj :TagbarOpen fj<CR>
+nnoremap <leader>tb :TagbarToggle<CR>
+nnoremap <leader>tp :TagbarTogglePause<CR>
+
+" }}}
+" Ultisnips {{{
+
+let g:UltiSnipsExpandTrigger = '<C-l>'
+
+" }}}
+" YouCompleteMe {{{
+
+" Set default config AND don't require prompt for configuration
+if has('win32')
+   let g:ycm_global_ycm_extra_conf = '$VIM/vimfiles/bundle/YouCompleteMe/.ycm_extra_conf.py'
+else
+   let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+endif
+let g:ycm_confirm_extra_conf = 0
+
+
+" }}}
 
 " }}}
 " Custom Mappings {{{
@@ -286,47 +327,9 @@ vnoremap <leader>s :sort i<CR>
 " Remap space to fold/unfold section
 nnoremap <space> za
 
-" History sensitive buffer jumping
-nnoremap <leader><C-o>  :BufSurfBack<CR>
-nnoremap <leader><C-i>  :BufSurfForward<CR>
-
-" Mappings for vim-fugitive
-nnoremap <leader>gs :Gstatus<CR><C-w>K<CR>
-nnoremap <leader>gl :Git! loggraph<CR>
-nnoremap <leader>gdi :Gdiff :<CR>
-nnoremap <leader>gdh :Gdiff HEAD<CR>
-nnoremap <leader>* :let @/=expand("<cword>")<CR>
-         \:execute 'silent Ggrep!' . shellescape(@/)<CR>
-         \:copen<CR><C-w>J<C-w><C-p>
-vnoremap <leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>
-         \:execute 'silent Ggrep!' . shellescape(@/)<CR>
-         \:copen<CR><C-w>J<C-w><C-p>
-
 " Open/close quickfix
 nnoremap <leader>qo :copen<CR>
 nnoremap <leader>qc :cclose<CR>
-
-" File switch
-nnoremap <leader>fs :FSHere<CR>
-
-" Open ctrlp
-let g:ctrlp_map = '<leader>fo'
-
-" Tagbar toggle for viewing organized tag list of current buffer
-nnoremap <leader>tj :TagbarOpen fj<CR>
-nnoremap <leader>tb :TagbarToggle<CR>
-nnoremap <leader>tp :TagbarTogglePause<CR>
-
-" Buffer surfing to jump between window buffers
-nnoremap <leader><C-o> :BufSurfBack<CR>
-nnoremap <leader><C-i> :BufSurfForward<CR>
-
-" Gundo toggle
-nnoremap <leader>gt :GundoToggle<CR>
-
-" Visual ag start search
-nnoremap <leader>a* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
-vnoremap <leader>a* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>
 
 " }}}
 
