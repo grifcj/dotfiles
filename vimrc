@@ -10,7 +10,7 @@ filetype plugin on   " Turns on filetype detection and enables file-type specifi
 
 set t_Co=256
 syntax on
-colorscheme desert
+colorscheme zenburn
 
 " Mark column 110 to guide line sizing
 set colorcolumn=110
@@ -163,6 +163,7 @@ Plugin 'drmikehenry/vim-headerguard'
 Plugin 'godlygeek/tabular'
 Plugin 'henrik/vim-qargs'
 Plugin 'honza/vim-snippets'
+Plugin 'jnurmine/Zenburn'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'rdnetto/YCM-Generator'
