@@ -112,6 +112,10 @@ set foldnestmax=10         " Don't fold anything when opening file
        \   exe "normal! g`\"" |
        \ endif
 
+     " " Can't say I edit a lot of modula2. Force markdown for *.md files
+     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+     autocmd FileType markdown setlocal sw=4 ts=4 sts=4
+
   augroup END
 " }}}
 " Custom Functions {{{
@@ -159,6 +163,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'shime/vim-livedown'
 Plugin 'SirVer/ultisnips'
 Plugin 'sjl/gundo.vim'
 Plugin 'tommcdo/vim-exchange'
@@ -167,6 +172,7 @@ Plugin 'ton/vim-bufsurf'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
@@ -247,6 +253,11 @@ endfunction
 function! g:HeaderguardLine3()
    return "#endif"
 endfunction
+
+"-------------------------------------------------------------------------------
+" Livedown preview
+"-------------------------------------------------------------------------------
+nnoremap <leader>lp :LivedownPreview<CR>
 
 " }}}
 " Custom Mappings {{{
