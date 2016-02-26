@@ -116,6 +116,11 @@ set foldnestmax=10         " Don't fold anything when opening file
      autocmd BufNewFile,BufReadPost *.md set filetype=markdown
      autocmd FileType markdown setlocal sw=4 ts=4 sts=4
 
+     " Set python code to follow PEP8 tab-rules
+     autocmd BufNewFile,BufReadPost *.py
+              \ setlocal ts=4 sts=4 sw=4 |
+              \ setlocal encoding=utf-8
+
   augroup END
 " }}}
 " Custom Functions {{{
