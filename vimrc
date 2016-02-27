@@ -316,10 +316,10 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 
 " Treat wrapped lines the same as regular lines for various movements
-noremap j gj
-noremap k gk
-noremap $ g$
-noremap ^ g^
+nnoremap <expr> j (&wrap) ? 'gj' : 'j'
+nnoremap <expr> k (&wrap) ? 'gk' : 'k'
+nnoremap <expr> ^ (&wrap) ? 'g^' : '^'
+nnoremap <expr> $ (&wrap) ? 'g$' : '$'
 
 " Resize windows
 nnoremap <leader>wi :vertical resize +20<CR>
