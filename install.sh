@@ -12,3 +12,4 @@ ln -svf $dir/bashrc ~/.bashrc
 ln -svf $dir/vimrc ~/.vimrc
 mkdir -pv ~/.vim/colors
 ln -svf $dir/colors/zenburn.vim ~/.vim/colors/zenburn.vim
+ln -svf $dir/colors/jellybeans.vim ~/.vim/colors/jellybeans.vim
