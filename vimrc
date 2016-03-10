@@ -10,8 +10,7 @@ filetype plugin on   " Turns on filetype detection and enables file-type specifi
 
 set t_Co=256
 syntax on
-colorscheme zenburn
-
+colorscheme jellybeans
 
 " }}}
 " Whitespace / Indentation {{{
