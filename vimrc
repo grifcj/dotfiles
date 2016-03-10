@@ -162,6 +162,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'jnurmine/Zenburn'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'powerman/vim-plugin-AnsiEsc'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
@@ -225,7 +226,8 @@ nnoremap <leader>fs :FSHere<CR>
 
 " Mappings for vim-fugitive
 nnoremap <leader>gs   :Gstatus<CR><C-w>K<CR>
-nnoremap <leader>gl   :Git! loggraph<CR>
+nnoremap <leader>glh  :Git! loggraph --color<CR>:AnsiEsc<CR>
+nnoremap <leader>gla  :Git! loggraph --color --all<CR>:AnsiEsc<CR>
 
 " }}}
 " Gundo toggle {{{
