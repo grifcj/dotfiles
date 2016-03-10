@@ -116,3 +116,6 @@ fi
 
 # Set vi mode
 set -o vi
+
+# Use python3 as default python version
+alias python=python3
