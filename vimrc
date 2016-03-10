@@ -12,9 +12,6 @@ set t_Co=256
 syntax on
 colorscheme zenburn
 
-" Mark column 110 to guide line sizing
-set colorcolumn=110
-highlight ColorColumn ctermbg=darkgrey
 
 " }}}
 " Whitespace / Indentation {{{
