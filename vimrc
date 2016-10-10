@@ -147,8 +147,6 @@ endif
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins
-Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'drmikehenry/vim-headerguard'
@@ -165,6 +163,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'shime/vim-livedown'
 Plugin 'SirVer/ultisnips'
 Plugin 'sjl/gundo.vim'
+Plugin 'sukima/xmledit'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'ton/vim-bufsurf'
