@@ -6,14 +6,12 @@ set nocompatible
 
 filetype plugin on   " Turns on filetype detection and enables file-type specific plugin
 
-" Colors {{{
+" Vim Options {{{
 
+" Use 256 colors, syntax highlighting, and jellybeans colorscheme
 set t_Co=256
 syntax on
 colorscheme jellybeans
-
-" }}}
-" Whitespace / Indentation {{{
 
 set tabstop=3        " Tab is equivalent to 3 spaces
 set expandtab        " Always expand tabs to spaces
@@ -25,8 +23,9 @@ set listchars=tab:>-,eol:<
 filetype indent on   " Use filetype specific indentation
 set autoindent       " Copy indent from current line when creating new line
 
-" }}}
-" UI Config {{{
+set nowrap           " Don't wrap text by default
+
+set timeoutlen=1000 ttimeoutlen=10 " Set timeout low for fast transition to normal mode
 
 set ttyfast          " Speed redrawing by transferring more characters to redraw
 set lazyredraw       " Don't auto redraw screen when executing macros, improves performance
@@ -48,9 +47,6 @@ set guioptions-=r    " No scrollbar
 " When opening vimdiff always split vertical and show filler lines
 " for missing text
 set diffopt=vertical,filler
-
-" }}}
-" Editing {{{
 
 set backspace=indent,eol,start
 set fileformat=unix
