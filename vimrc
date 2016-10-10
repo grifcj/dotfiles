@@ -36,7 +36,7 @@ set hidden           " No error/warnings when navigating away from edited file
 set splitbelow       " Split below by default
 set autowrite        " Save all buffers when commands like 'make' called
 
-set statusline="%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P"
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%y%-14.(%l,%c%V%)\ %P
 
 set noswapfile       " No swap files, we have version control for pete's sake
 
