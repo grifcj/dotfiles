@@ -8,11 +8,6 @@ filetype plugin on   " Turns on filetype detection and enables file-type specifi
 
 " Vim Options {{{
 
-" Use 256 colors, syntax highlighting, and jellybeans colorscheme
-set t_Co=256
-syntax on
-colorscheme jellybeans
-
 set tabstop=3        " Tab is equivalent to 3 spaces
 set expandtab        " Always expand tabs to spaces
 set softtabstop=3    " Use 3 spaces when pressing tab in insert mode
@@ -50,8 +45,14 @@ set guifont=Consolas:h11:cANSI
 set diffopt=vertical,filler
 
 set backspace=indent,eol,start
-set fileformat=unix
-set fileformats=unix,dos
+if has('win32')
+   set fileformat=dos
+   set fileformats=dos,unix
+else
+   set fileformat=unix
+   set fileformats=unix,dos
+endif
+
 
 " }}}
 " Searching, Wildmode {{{
@@ -184,6 +185,12 @@ Plugin 'Valloric/YouCompleteMe'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Jellybeans {{{
+" Use 256 colors, syntax highlighting, and jellybeans colorscheme
+set t_Co=256
+syntax on
+colorscheme jellybeans
+" }}}
 " Ag / Visual Star Search {{{
 
 nnoremap <leader>a* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
