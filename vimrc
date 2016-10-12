@@ -36,7 +36,7 @@ set hidden           " No error/warnings when navigating away from edited file
 set splitbelow       " Split below by default
 set autowrite        " Save all buffers when commands like 'make' called
 
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%y%-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ %w%h%m%r%{fugitive#statusline()}%=%y%-14.(%l,%c%V%)\ %P
 
 set noswapfile       " No swap files, we have version control for pete's sake
 
@@ -93,7 +93,7 @@ set foldnestmax=10         " Don't fold anything when opening file
   autocmd!
 
      " Use desired format options
-      autocmd BufNewFile,BufRead * setlocal formatoptions=croqnj2
+     autocmd BufNewFile,BufRead * setlocal formatoptions=croqnj2
 
      " Always strip trailing whitespace when editing a file
      autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
