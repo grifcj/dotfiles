@@ -43,6 +43,7 @@ set noswapfile       " No swap files, we have version control for pete's sake
 " For GVim
 set guioptions-=T    " No toolbar
 set guioptions-=r    " No scrollbar
+set guifont=Consolas:h11:cANSI
 
 " When opening vimdiff always split vertical and show filler lines
 " for missing text
@@ -91,6 +92,9 @@ set foldnestmax=10         " Don't fold anything when opening file
   augroup configgroup
   autocmd!
 
+     " Use desired format options
+      autocmd BufNewFile,BufRead * setlocal formatoptions=croqnj2
+
      " Always strip trailing whitespace when editing a file
      autocmd BufWritePre * call <SID>StripTrailingWhitespaces()
 
@@ -136,8 +140,8 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 if has('win32')
-   set rtp+=$VIM/vimfiles/bundle/Vundle.vim
-   call vundle#begin('$VIM/vimfiles/bundle/')
+   set rtp+=$HOME/.vim/bundle/Vundle.vim
+   call vundle#begin('$HOME/.vim/bundle/')
 else
    set rtp+=~/.vim/bundle/Vundle.vim
    call vundle#begin()
@@ -153,9 +157,9 @@ Plugin 'drmikehenry/vim-headerguard'
 Plugin 'godlygeek/tabular'
 Plugin 'henrik/vim-qargs'
 Plugin 'honza/vim-snippets'
-Plugin 'jnurmine/Zenburn'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'nanotech/jellybeans.vim'
 Plugin 'powerman/vim-plugin-AnsiEsc'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'rking/ag.vim'
@@ -232,25 +236,10 @@ nnoremap <leader>gt :GundoToggle<CR>
 " }}}
 " Headerguard {{{
 
-" Use python for random number generation
-function! <SID>RandomNumber(digits)
-
-python << EOF
-import random, vim
-powStart = vim.bindeval('a:digits')
-powEnd = powStart+1;
-vim.command("let number = '%s'" %
-         \ random.randrange(10**powStart,10**powEnd))
-EOF
-
-   return number
-endfunction
-
 " Header name defined to be filename, with incompatible characters
 " converted to underscores and appended with 10-digit random number
 function! g:HeaderguardName()
    let g:headerGuardName = toupper(expand('%:t:gs/[^0-9a-zA-Z_]/_/'))
-            \ . '_' . <SID>RandomNumber(10)
    return g:headerGuardName
 endfunction
 
@@ -294,8 +283,15 @@ else
 endif
 let g:ycm_confirm_extra_conf = 0
 
-let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 noremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
 
 " }}}
 
@@ -329,6 +325,14 @@ nnoremap <space> za
 " Open/close quickfix
 nnoremap <leader>qo :copen<CR>
 nnoremap <leader>qc :cclose<CR>
+
+" Todo
+inoremap <leader>todo @todo<Tab>CJG <C-r>=strftime('%b %d, %Y')<CR>:
+
+" SVN
+nnoremap <leader>sl :Dispatch svn log -rHEAD:1 -l5<CR>
+nnoremap <leader>ss :Dispatch svn status -q -u<CR>
+nnoremap <leader>sd :read! svn diff -rHEAD<CR>
 
 " }}}
 
